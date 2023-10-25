@@ -1,10 +1,19 @@
 <script setup>
+import c_Navbar from "@/components/Navbar.vue";
+import c_ImageText from "@/components/ImageText.vue";
+import c_MostInfo from "@/components/MostInfo.vue";
+import c_ImageShower from "@/components/ImageShower.vue";
+import c_Graph from "@/components/Graph.vue";
+import c_Recommend from "@/components/Recommendations.vue";
+import c_SongPlaying from "@/components/SongPlaying.vue";
 </script>
 
 <template>
+  <!-- NAVBAR -->
+  <c_Navbar></c_Navbar>
   <!-- ALL -->
   <main
-    class="grid grid-cols-1 . md:grid-cols-1 . 2xl:grid-cols-9 | min-h-[calc(100vh)] | p-c_pad gap-c_gap bg-c_bg"
+    class="grid grid-cols-1 . md:grid-cols-1 . 2xl:grid-cols-9 | min-h-[calc(100vh-64px)] mt-16 | p-c_pad gap-c_gap bg-c_bg"
   >
     <!-- COL 1 -->
     <div
