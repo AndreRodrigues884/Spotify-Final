@@ -1,10 +1,65 @@
-/* Import base styles from Tailwind CSS */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 @import "tailwindcss/base";
-
-/* Import component styles from Tailwind CSS */
 @import "tailwindcss/components";
-
-/* Import utility styles from Tailwind CSS */
 @import "tailwindcss/utilities";
 
-/* Your custom styles go here */
+@layer base {
+  /* LIGHT MODE */
+
+  :root {
+    --color-accent: 29 185 84;
+    --color-primary: 255 255 255;
+    --color-secondary: 30 30 30;
+    --color-bg: 245 246 250;
+    --shadow: 0px 0px 4px 0px rgba(97, 91, 172, 0.25);
+    /*  */
+    --borderRadius: 1.25rem;
+    --bodyPadding: 2.5rem;
+    --padding: 2rem;
+    --gridSpacing: 1.25rem;
+    /*  */
+    --textOne: 1.5rem;
+  }
+
+  /* DARK MODE */
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-accent: 32 207 94;
+      --color-primary: 29 28 37;
+      --color-secondary: 243 243 243;
+      --color-bg: 21 19 29;
+      --shadow: 0px 0px 4px 0px rgba(219, 219, 219, 0.25);
+    }
+  }
+
+  /* TABLET */
+
+  @media screen and (min-width: 768px) and (max-width: 1024px) {
+    :root {
+      --borderRadius: 1rem;
+      --bodyPadding: 2rem;
+      --padding: 1.25rem;
+      --gridSpacing: 1rem;
+      /*  */
+      --textOne: 1.25rem;
+    }
+  }
+
+  /* MOBILE */
+
+  @media screen and (max-width: 768px) {
+    :root {
+      --borderRadius: 1rem;
+      --bodyPadding: 1.25rem;
+      --padding: 1rem;
+      --gridSpacing: 1rem;
+      /*  */
+      --textOne: 1.25rem;
+    }
+  }
+
+  /* body::-webkit-scrollbar {
+    display: none;
+  } */
+}

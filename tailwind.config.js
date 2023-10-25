@@ -2,7 +2,30 @@
 module.exports = {
   content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    colors: {
+      c_accent: "rgb(var(--color-accent) / <alpha-value>)",
+      c_primary: "rgb(var(--color-primary) / <alpha-value>)",
+      c_secondary: "rgb(var(--color-secondary) / <alpha-value>)",
+      c_bg: "rgb(var(--color-bg) / <alpha-value>)",
+    },
+    fontFamily: {
+      sans: ["Inter", "sans-serif"],
+    },
+    extend: {
+      borderRadius: {
+        c_br: "var(--borderRadius)",
+      },
+      spacing: {
+        c_bodyP: "var(--bodyPadding)",
+        c_gap: "var(--gridSpacing)",
+        c_pad: "var(--padding)",
+      },
+      boxShadow: {
+        c_shadow: "var(--shadow)",
+      },
+      fontSize: {
+        c_txt1: "var(--textOne)",
+      },
+    },
   },
-  plugins: [],
 };
