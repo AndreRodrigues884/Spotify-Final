@@ -11,6 +11,7 @@
     --color-primary: 255 255 255;
     --color-secondary: 30 30 30;
     --color-bg: 245 246 250;
+    --color-bg-landing: 255 255 255;
     --shadow: 0px 0px 4px 0px rgba(97, 91, 172, 0.25);
     /*  */
     --borderRadius: 1.25rem;
@@ -30,6 +31,7 @@
       --color-primary: 29 28 37;
       --color-secondary: 243 243 243;
       --color-bg: 21 19 29;
+      --color-bg-landing: 31 29 49;
       --shadow: 0px 0px 4px 0px rgba(219, 219, 219, 0.25);
     }
   }

@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import LandPage from "../views/LandPage.vue";
+import API from "../views/API.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -8,8 +9,13 @@ const router = createRouter({
     {
       path: "/",
       name: "default",
-      component: LandPage,
+      component: API,
     },
+    /* {
+      path: "/",
+      name: "default",
+      component: LandPage,
+    }, */
     {
       path: "/landpage",
       name: "landPage",

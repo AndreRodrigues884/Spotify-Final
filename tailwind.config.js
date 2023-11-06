@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  darkMode: 'class',
+  darkMode: "class",
   content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   theme: {
     colors: {
@@ -8,6 +8,7 @@ module.exports = {
       c_primary: "rgb(var(--color-primary) / <alpha-value>)",
       c_secondary: "rgb(var(--color-secondary) / <alpha-value>)",
       c_bg: "rgb(var(--color-bg) / <alpha-value>)",
+      c_bg_landing: "rgb(var(--color-bg-landing) / <alpha-value>)",
     },
     fontFamily: {
       sans: ["Inter", "sans-serif"],
