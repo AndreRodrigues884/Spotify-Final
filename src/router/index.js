@@ -11,11 +11,6 @@ const router = createRouter({
       name: "default",
       component: API,
     },
-    /* {
-      path: "/",
-      name: "default",
-      component: LandPage,
-    }, */
     {
       path: "/landpage",
       name: "landPage",
@@ -30,3 +25,4 @@ const router = createRouter({
 });
 
 export default router;
+
