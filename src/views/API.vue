@@ -1,28 +1,26 @@
 <script>
-import { useRefreshTokenStore } from "@/stores/useRefreshToken";
+import { useApiStore } from "@/stores/useRefreshToken";
 export default {
   data() {
     return {
-      store: useRefreshTokenStore(),
-      artists: [],
+      store: useApiStore(),
     };
   },
-  onMounted() {
-    this.refreshTokenStore.fetchData();
+  created() {
+    try {
+      this.store.getArtists();
+    } catch (error) {
+      alert(`Error: ${error}`);
+    }
   },
-  methods: {
-    async getArtists() {
-      const apiToken = localStorage.getItem("access_token");
-      const response = await fetch(
-        "https://api.spotify.com/v1/artists?ids=2CIMQHirSU0MQqyYHq0eOx%2C57dN52uHvrHOxijzpIgu3E%2C1vCWHaC5f2uS3yhpwWbIA6",
-        {
-          headers: {
-            Authorization: `Bearer ${apiToken}`,
-          },
-        }
-      );
-      const data = await response.json();
-      return data.artists;
+  onMounted() {
+    setInterval(() => {
+      this.store.fetchData();
+    }, 3600000);
+  },
+  computed: {
+    artists() {
+      return this.store.getAllArtists;
     },
   },
 };

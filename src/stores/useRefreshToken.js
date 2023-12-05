@@ -1,6 +1,13 @@
 import { defineStore } from "pinia";
 
-export const useRefreshTokenStore = defineStore("useRefreshTokenStore", {
+export const useApiStore = defineStore("useRefreshTokenStore", {
+  state: () => ({
+    accessToken: "", // não está a ser usado
+    artists: [],
+  }),
+  getters: {
+    getAllArtists: (state) => state.artists,
+  },
   actions: {
     async getRefreshToken() {
       const refreshToken = import.meta.env.VITE_API_REFRESH_TOKEN;
@@ -36,8 +43,6 @@ export const useRefreshTokenStore = defineStore("useRefreshTokenStore", {
           const data = await response.json();
           // Atualizar o access_token e refresh_token no localStorage
           localStorage.setItem("access_token", data.access_token);
-          const tokenExpirationTime = 3600000;
-          setTimeout(() => this.getRefreshToken(), tokenExpirationTime);
         } else {
           console.error(
             "Error while soliciting new token: ",
@@ -49,7 +54,23 @@ export const useRefreshTokenStore = defineStore("useRefreshTokenStore", {
         console.error("Erro ao renovar o token: ", error);
       }
     },
+
+    async getArtists() {
+      const apiToken = localStorage.getItem("access_token");
+      const response = await fetch(
+        "https://api.spotify.com/v1/artists?ids=2CIMQHirSU0MQqyYHq0eOx%2C57dN52uHvrHOxijzpIgu3E%2C1vCWHaC5f2uS3yhpwWbIA6",
+        {
+          headers: {
+            Authorization: `Bearer ${apiToken}`,
+          },
+        }
+      );
+      const data = await response.json();
+      this.artists = data.artists;
+    },
+
     async fetchData() {
+      console.log("tentei");
       await this.getRefreshToken();
     },
   },
