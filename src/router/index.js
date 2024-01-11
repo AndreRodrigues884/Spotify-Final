@@ -3,6 +3,8 @@ import HomeView from "../views/HomeView.vue";
 import LandPage from "../views/LandPage.vue";
 import API from "../views/API.vue";
 
+
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -21,6 +23,7 @@ const router = createRouter({
       name: "home",
       component: HomeView,
     },
+   
   ],
 });
 

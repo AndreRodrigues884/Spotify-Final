@@ -1,11 +1,15 @@
 <script>
 import ChevronDown from "icons/ChevronDown.vue";
 import ChevronUp from "icons/ChevronUp.vue";
+import { useAuthStore } from '../stores/store';
 
 export default {
   data() {
     return {
+      authStore: useAuthStore(),
       openMenu: false,
+      menuText: "6 MONTH",
+      isSixSelected: true,
     };
   },
   components: {
@@ -15,7 +19,18 @@ export default {
   methods: {
     toggleMenu() {
       this.openMenu = !this.openMenu;
+      this.menuText = this.openMenu ? "Last Month" : "6 Month";
     },
+    changeSelected(){
+      this.isSixSelected = !this.isSixSelected;
+      this.authStore.changeTimeline();
+      this.authStore.getArtists();
+    }
+  },
+  computed: {
+    name() {
+      return this.data 
+    }
   },
 };
 </script>
@@ -30,7 +45,7 @@ export default {
       <p class="text-c_primary">
         <span class="text-c_primary/50">LAST </span>
         <span @click="toggleMenu()" class="cursor-pointer text-c_txt1"
-          >MONTH</span
+          >{{ this.isSixSelected ? '1 Month' : '6 Months' }}</span
         >
       </p>
       <ChevronDown
@@ -47,9 +62,9 @@ export default {
       ></ChevronUp>
     </div>
 
-    <span v-if="openMenu" class="fixed top-20 right-c_bodyP">
+    <span @click="authStore.changeTimeline() && authStore.getArtists()" v-if="openMenu" class="fixed top-20 right-c_bodyP">
       <ul class="bg-c_accent rounded-c_br">
-        <li class="text-c_primary px-10 py-4">6 Months</li>
+        <li @click="changeSelected()" class="text-c_primary px-10 py-4 select-none">{{ this.isSixSelected ? '6 Months' : '1 Month' }}</li>
       </ul></span
     >
   </nav>

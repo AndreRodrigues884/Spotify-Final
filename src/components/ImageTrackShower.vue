@@ -13,7 +13,7 @@ export default {
   data() {
     return {
       authStore: useAuthStore(),
-      spotifyData: null,
+      userSongSpotifyData: null,
       amount: window.innerWidth >= 1280 ? 5 : window.innerWidth >= 768 ? 4 : 3,
     };
   },
@@ -28,8 +28,8 @@ export default {
   methods: {
     async loadData() {
       try {
-        await this.authStore.getArtists(); //obter dados das playlists pelas actions da store
-        this.spotifyData = this.authStore.spotifyData; //obter dados das playlists pelas actions da store
+        await this.authStore.getUserTopTracks(); //obter dados das musicas pelas actions da store
+        this.userSongSpotifyData = this.authStore.spotifyData; //obter dados das musicas pelas actions da store
       } catch (error) {
         alert(error.message);
       }
@@ -40,17 +40,15 @@ export default {
 </script>
 
 <template>
-  <div v-if="spotifyData && spotifyData.items" class="flex gap-c_gap pt-c_pad">
-    <div
-    v-for="artist in spotifyData.items" :key="artist.id"
-    >
+  <div v-if="userSongSpotifyData && userSongSpotifyData.items" class="flex gap-c_gap pt-c_pad">
+    <div v-for="track in userSongSpotifyData.items" :key="track.id">
       <img
         class="aspect-square object-cover rounded-xl"
-        :src="artist.images[2].url"
+        :src="track.album.images[1].url"
         alt="artist_pfp"
       />
       <div class="w-full flex justify-between items-center pt-3">
-        <h5 class="text-c_secondary font-semibold">{{ artist.name }}</h5>
+        <h6 class="text-c_secondary font-semibold">{{ track.name }}</h6>
         <Eye :size="16" :class="['text-c_secondary', 'fill-current']"></Eye>
       </div>
     </div>

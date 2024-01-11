@@ -1,107 +1,57 @@
 <template>
-  <div
-    class="flex lg:flex-col h-full overflow-x-scroll lg:overflow-x-auto lg:overflow-y-scroll lg:max-h-80"
+  <div v-if="getRecommendations && getRecommendations.tracks"
+    class="flex lg:flex-col h-full overflow-x-scroll lg:overflow-x-auto lg:overflow-y-scroll lg:max-h-96"
   >
     <div
-      v-for="song in songs"
-      :key="song.id"
+    v-for="recommendations in getRecommendations.tracks" :key="recommendations.id"
       class="flex justify-center items-center mb-3"
     >
       <!-- put h-full after removing scrollbars -->
       <img
         class="h-16 aspect-square object-cover"
-        :src="song.images[0].url"
-        alt="song photo"
+        :src="recommendations.album.images[2].url" alt="Recommendations Image"
       />
       <div class="pl-[10px] pr-4 truncate w-[160px] text-c_secondary">
-        <p class="truncate">{{ song.title }}</p>
-        <p class="truncate">{{ song.artist }}</p>
+        {{ recommendations.name }}
       </div>
+      <br>
+      <!-- <div v-for="(artist, index) in recommendations.artists" :key="index" class="pl-[10px] pr-4 truncate w-[160px] text-c_secondary">
+        <p>{{ artist.name }}</p>
+      </div> -->
     </div>
   </div>
 </template>
 
 <script>
+import { useAuthStore } from '../stores/store';
 export default {
-  beforeMount() {
-    // Perform API call or data loading
-    // Make sure the songs array is populated with data
-  },
   data() {
     return {
-      songs: [
-        {
-          id: 1,
-          title: "Glimpse of us",
-          artist: "Joji",
-          images: [
-            {
-              url: "https://upload.wikimedia.org/wikipedia/en/1/1b/Joji_-_Nectar.png",
-            },
-          ],
-        },
-        {
-          id: 2,
-          title: "See you again",
-          artist: "Tyler, the Creator",
-          images: [
-            {
-              url: "https://i1.sndcdn.com/artworks-c7lzSKA5KpLx7Hes-E0ryNg-t500x500.jpg",
-            },
-          ],
-        },
-        {
-          id: 3,
-          title: "Song 1 with a very long title that should get truncated",
-          artist: "Joji",
-          images: [
-            {
-              url: "https://upload.wikimedia.org/wikipedia/en/1/1b/Joji_-_Nectar.png",
-            },
-          ],
-        },
-        {
-          id: 4,
-          title: "See you again",
-          artist: "Tyler, the Creator",
-          images: [
-            {
-              url: "https://i1.sndcdn.com/artworks-c7lzSKA5KpLx7Hes-E0ryNg-t500x500.jpg",
-            },
-          ],
-        },
-        {
-          id: 5,
-          title: "Redbone",
-          artist: "Gambino",
-          images: [
-            {
-              url: "https://i.ytimg.com/vi/Kp7eSUU9oy8/maxresdefault.jpg",
-            },
-          ],
-        },
-        {
-          id: 6,
-          title: "Blinding lights",
-          artist: "The Weeknd",
-          images: [
-            {
-              url: "https://i.ytimg.com/vi/fHI8X4OXluQ/maxresdefault.jpg",
-            },
-          ],
-        },
-        {
-          id: 7,
-          title: "See you again",
-          artist: "Tyler, the Creator",
-          images: [
-            {
-              url: "https://i1.sndcdn.com/artworks-c7lzSKA5KpLx7Hes-E0ryNg-t500x500.jpg",
-            },
-          ],
-        },
-      ],
+      authStore: useAuthStore(),
+      getRecommendations: null,
     };
+  },
+  beforeMount() {
+    setInterval(() => this.authStore.init(), 3600000);
+    /* console.log(this.authStore.init()); */
+  },
+  created() { //vai buscar o access token e a informação nas actions da store
+    try {
+      this.authStore.refreshToken();
+      this.loadData();
+    } catch (error) {
+      alert(error.message);
+    };
+  },
+  methods: {
+    async loadData() {
+      try {
+        /* await this.authStore.getRecommendations(); */ //obter dados das musicas pelas actions da store
+       /*  this.getRecommendations = this.authStore.spotifyData; */ //obter dados das musicas pelas actions da store
+      } catch (error) {
+        alert(error.message);
+      }
+    },
   },
 };
 </script>
