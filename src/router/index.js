@@ -1,8 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import LandPage from "../views/LandPage.vue";
-import API from "../views/API.vue";
-
+import ArtistView from "../views/ArtistView.vue";
 
 
 const router = createRouter({
@@ -10,11 +9,6 @@ const router = createRouter({
   routes: [
     {
       path: "/",
-      name: "default",
-      component: API,
-    },
-    {
-      path: "/landpage",
       name: "landPage",
       component: LandPage,
     },
@@ -23,7 +17,12 @@ const router = createRouter({
       name: "home",
       component: HomeView,
     },
-   
+    {
+      path: "/artists",
+      name: "artists",
+      component: ArtistView,
+    },
+
   ],
 });
 

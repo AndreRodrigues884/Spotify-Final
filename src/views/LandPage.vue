@@ -4,7 +4,6 @@
   <img class="absolute top-96 left-0 w-1/2 z-0" src="../assets/images/circle_2.png" />
 
   <!-- Content -->
-
   <main class="bg-c_bg_landing">
     <header class="grid grid-cols-1 w-screen p-c_bodyP">
       <span class="flex flex-col col-span-2 w-full z-10">
@@ -13,10 +12,10 @@
           <p class="text-[24px] font-semibold text-c_secondary | md:text-[32px]">
             Listen while watching
           </p>
-         <button @click="goToDashboard"
-              class="text-[12px] hover:scale-110 transition-transform font-semibold bg-c_accent p-4 rounded-full text-c_secondary | md:text-[16px]">
-              Go To Dashboard
-            </button>
+         <router-link to="/home"
+            class="text-[12px] hover:scale-110 transition-transform font-semibold bg-c_accent p-4 rounded-full text-c_secondary | md:text-[16px]">
+            Go To Dashboard
+          </router-link>
         </span>
         <span class="flex justify-center w-full">
           <img class="pt-16 p-0 w-[80vw] | sm_p-8" :src="images[modeActive].imgDashboard" />
@@ -93,11 +92,6 @@ export default {
         },
       },
     };
-  },
-  methods: {
-    goToDashboard() {
-      this.$router.push('/home')
-    }
   }
 };
 </script>

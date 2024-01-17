@@ -4,7 +4,7 @@
   >
     <div
     v-for="recommendations in getRecommendations.tracks" :key="recommendations.id"
-      class="flex justify-center items-center mb-3"
+      class="flex justify-center items-center mb-3 w-52"
     >
       <!-- put h-full after removing scrollbars -->
       <img
@@ -15,9 +15,9 @@
         {{ recommendations.name }}
       </div>
       <br>
-      <!-- <div v-for="(artist, index) in recommendations.artists" :key="index" class="pl-[10px] pr-4 truncate w-[160px] text-c_secondary">
+      <div v-for="(artist, index) in recommendations.artists" :key="index" class="pl-[10px] pr-4 truncate w-[160px] text-c_secondary">
         <p>{{ artist.name }}</p>
-      </div> -->
+      </div>
     </div>
   </div>
 </template>
@@ -31,13 +31,8 @@ export default {
       getRecommendations: null,
     };
   },
-  beforeMount() {
-    setInterval(() => this.authStore.init(), 3600000);
-    /* console.log(this.authStore.init()); */
-  },
-  created() { //vai buscar o access token e a informação nas actions da store
+  created() { //call the method loadData to get requests from api
     try {
-      this.authStore.refreshToken();
       this.loadData();
     } catch (error) {
       alert(error.message);
@@ -46,8 +41,8 @@ export default {
   methods: {
     async loadData() {
       try {
-        /* await this.authStore.getRecommendations(); */ //obter dados das musicas pelas actions da store
-       /*  this.getRecommendations = this.authStore.spotifyData; */ //obter dados das musicas pelas actions da store
+          await this.authStore.getRecommendations();   
+          this.getRecommendations = this.authStore.spotifyData; 
       } catch (error) {
         alert(error.message);
       }

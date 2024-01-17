@@ -1,12 +1,9 @@
 <script>
 import { useAuthStore } from '../stores/store';
 import Eye from "icons/Eye.vue";
+import emitter from "../router/eventBus";
 
 export default {
-  beforeMount() {
-    setInterval(() => this.authStore.init(), 3600000);
-    /* console.log(this.authStore.init()); */
-  },
   components: {
     Eye,
   },
@@ -17,13 +14,12 @@ export default {
       amount: window.innerWidth >= 1280 ? 5 : window.innerWidth >= 768 ? 4 : 3,
     };
   },
-  created() { //vai buscar o access token e a informação nas actions da store
-    try {
-      this.authStore.refreshToken();
+  created() { //call the method loadData to get requests from api
       this.loadData();
-    } catch (error) {
-      alert(error.message);
-    };
+      emitter.on('changeData', this.loadData);
+  },
+  unmounted () {
+    emitter.off('changeData', this.loadData);
   },
   methods: {
     async loadData() {

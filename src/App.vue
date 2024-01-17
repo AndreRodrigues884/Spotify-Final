@@ -1,20 +1,9 @@
+
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-
-
-/* import LandPage from './views/LandPage.vue'; */
-import HomeView from './views/HomeView.vue'
-
+import { RouterView } from 'vue-router'
 </script>
-
 <template>
-
-  <HomeView></HomeView>
-<!--   <LandPage></LandPage> -->
-
-
-
-  
+  <router-view />
 </template>
 <style>
 </style>

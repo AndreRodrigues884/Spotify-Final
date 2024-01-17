@@ -4,7 +4,7 @@
       {{ title }}
       <span class="text-c_secondary/50 font-semibold">({{ period }})</span>
     </p>
-    <p class="text-c_secondary cursor-pointer">see more</p>
+     <span @click="redirectToArtists" class="text-c_secondary cursor-pointer">see more</span>
   </div>
 </template>
 
@@ -22,6 +22,12 @@ export default {
       default: "",
     },
   },
+  methods: {
+  redirectToArtists() {
+    console.log('aqui');
+    this.$router.push('/artists');
+  },
+},
 };
 </script>
 

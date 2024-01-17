@@ -10,7 +10,6 @@ import c_ImageTrackShower from "../components/ImageTrackShower.vue";
 import { useAuthStore } from '../stores/store';
 
 
-
 export default {
   components: {
     c_Navbar,
@@ -25,43 +24,23 @@ export default {
   data() {
     return {
       authStore: useAuthStore(),
-      userData: null,
       spotifyData: null,
-    }
+      amount: window.innerWidth >= 1280 ? 5 : window.innerWidth >= 768 ? 4 : 3,
+    };
   },
-  computed: {
-    getUserFollowers() {
-      return this.userData.followers.total
-    },
-    getUserName() {
-      return this.userData.display_name
-    },
-    getUserType() {
-      return this.userData.type
-    },
-    getUserImage() {
-      return this.userData.images[0]?.url
-    }
-  },
-  beforeMount() { // get access token
-    this.init();
+  created() { 
+    try {
+      this.loadData();
+    } catch (error) {
+      alert(error.message);
+    };
   },
   methods: {
-    async init() {
+    async loadData() {
       try {
-        const result = await this.authStore.init(); //if ok
-        if (result) {
-          this.loadData(); //load data from api
-
-        }
-      } catch (error) {
-        alert(error.message);
-      };
-    },
-    async loadData() { //get api info
-      try {
-        await this.authStore.getUserSpotifyData(); //obter dados do user pelas actions da store
-        this.userData = this.authStore.spotifyData; //obter dados do user pelas actions da store
+        
+        await this.authStore.getArtists(); 
+        this.spotifyData = this.authStore.spotifyData; 
       } catch (error) {
         alert(error.message);
       }
@@ -71,28 +50,26 @@ export default {
 </script>
 
 <template>
-  <!-- NAVBAR -->
-  <c_Navbar @timeline-changed="handleTimelineChanged"></c_Navbar>
 
-
-  <!-- ALL -->
-  <main v-if="userData"
+  <c_Navbar></c_Navbar>
+  <main
+    v-if="userData"
     class="grid grid-cols-1 . md:grid-cols-1 . 2xl:grid-cols-9 | min-h-[calc(100vh-64px)] mt-16 | p-c_pad gap-c_gap bg-c_bg">
-    <!-- COL 1 -->
+
     <div
       class="col-span-1 . md:col-span-1 . 2xl:col-span-5 | grid grid-cols-2 . md:grid-cols-3 . 2xl:grid-cols-3 | grid-rows-8 | gap-c_gap bg-c_bg">
       <div class="col-span-1 . md:col-span-1 | row-span-2 | bg-c_primary p-c_pad rounded-c_br shadow-c_shadow">
-        <c_ImageText :image="getUserImage" :info="getUserName">
+        <c_ImageText :image="userData.images[0]?.url" :info="userData.display_name">
         </c_ImageText>
       </div>
-      <!--  -->
+      
       <div class="col-span-1 . md:col-span-1 | row-span-2 | bg-c_primary p-c_pad rounded-c_br shadow-c_shadow">
-        <c_ImageText :info="getUserType || 'Produto indisponível'" image='/public/images/logo.png'></c_ImageText>
+        <c_ImageText :info="userData.product" image='/public/images/logo.png'></c_ImageText>
       </div>
       <div class="col-span-2 . md:col-span-1 | row-span-2 | bg-c_primary p-c_pad rounded-c_br shadow-c_shadow">
         <c_ImageText info="Followers" :text="getUserFollowers"></c_ImageText>
       </div>
-      <!--  -->
+
       <div
         class="col-span-2 . md:col-span-3 | row-span-3 | flex flex-col justify-center items-center | bg-c_primary p-c_pad rounded-c_br shadow-c_shadow">
         <c_MostInfo title="Most Listened Artists" period="Month" />
@@ -104,7 +81,7 @@ export default {
         <c_ImageTrackShower />
       </div>
     </div>
-    <!-- COL 2 -->
+
     <div
       class="col-span-1 . md:col-span-1 . 2xl:col-span-4 | grid grid-cols-1 . md:grid-cols-3 . 2xl:grid-cols-3 | grid-rows-9 | gap-c_gap bg-c_bg rounded-c_br">
       <div

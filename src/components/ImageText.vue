@@ -5,9 +5,7 @@ export default {
     image: String,
     text: String,
     info: { type: String, required: true },
-    
   },
-  
 };
 </script>
 
