@@ -1,29 +1,32 @@
-# grid
 
-This template should help get you started developing with Vue 3 in Vite.
+# Spotify Dashboard
 
-## Recommended IDE Setup
+This project was part of learning the framework Vue for a subject in school called Web Programming.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
 
-## Customize configuration
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+
 
 ## Project Setup
 
-```sh
-npm install
+Uses npm and Vite
+
+```npm
+  npm install 
+  npm run dev
 ```
+    
+# Demo
 
-### Compile and Hot-Reload for Development
+[Dashboard-Spotify.webm](https://github.com/AndreRodrigues884/Spotify-Final/assets/145811403/65eb09b9-bab6-425a-a27c-beef564bd9e4)
 
-```sh
-npm run dev
-```
 
-### Compile and Minify for Production
+## Functionalities
 
-```sh
-npm run build
-```
+- User Login
+- Show Data From Spotify Api
+- Change Data By Month
+- User Logout
+
+
+
